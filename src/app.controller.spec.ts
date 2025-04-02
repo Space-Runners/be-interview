@@ -14,9 +14,22 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  describe('createFontStyles', () => {
+    it('should return an array of images', async () => {
+      const response = await appController.createFontStyles({
+        text: 'Testing text',
+        styleId: 1,
+        numSamples: 1,
+      });
+
+      expect(response).toStrictEqual([
+        {
+          id: expect.any(String),
+          url: expect.any(String),
+          styleId: 1,
+          createdAt: expect.any(Date),
+        },
+      ]);
     });
   });
 });
